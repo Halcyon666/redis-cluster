@@ -20,6 +20,12 @@ spring:
   cache:
     jcache:
       config: classpath:ehcache.xml
+#  mvc:
+#    view:
+#      prefix: /pages/
+#      suffix: .html
 server:
   port: 80
+
+
 

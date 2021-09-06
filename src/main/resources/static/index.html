@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="modal-body">
+    <form id="upload" enctype="multipart/form-data">
+        <div class="grid-btn">
+            <button id="download" type="button" class="btn btn-default col-sm-2 col-sm-offset-2">
+                <span class="fa fa-file-excel-o fa-fw"></span>下载模板
+            </button>
+            <div class="form-group col-sm-3 col-sm-offset-1">
+                <input type="file" name="file">
+            </div>
+            <button type="submit" class="ladda-button ladda-button-submit_m btn btn-primary"
+                    data-style="expand-right">
+                <span></span>提交
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="modal-body">
+    <form id="upload1" action="upload1" method="post" enctype="multipart/form-data">
+        <div class="grid-btn">
+            <div class="form-group col-sm-3 col-sm-offset-1">
+                <input type="file" name="file">
+            </div>
+            <button type="submit" class="ladda-button ladda-button-submit_m btn btn-primary"
+                    data-style="expand-right" onsubmit="return saveReport();">
+                <span></span>提交1
+            </button>
+        </div>
+    </form>
+</div>
+<script>
+    function saveReport() {
+// jquery 表单提交
+        $("#upload1").ajaxSubmit(function(message) {
+            // 对于表单提交成功后处理，message为提交页面saveReport.htm的返回内容
+            alert(message);
+        });
+
+        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+    }
+</script>
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+<script src="js/index.js" type="text/javascript"></script>
+</body>
+</html>
