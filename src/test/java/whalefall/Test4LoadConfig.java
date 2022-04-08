@@ -1,15 +1,14 @@
-package com.example.demo;
+package whalefall;
 
-import whalefall.loadconfigtest.LoadConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
+import whalefall.loadconfigtest.loadconfigfrompropfile.LoadConfig;
 
 @SpringBootTest
 @Slf4j
-class DemoApplicationTests {
+class Test4LoadConfig {
 
 	@Autowired
 	private LoadConfig loadConfig;
@@ -17,7 +16,6 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads() {
 		log.info(String.format("A :%s B :%s", loadConfig.getA(), loadConfig.getB()));
-		Assert.isTrue(loadConfig.getA() != null,"配置项为空");
 	}
 
 }

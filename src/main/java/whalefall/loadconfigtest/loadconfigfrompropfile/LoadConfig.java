@@ -1,4 +1,4 @@
-package whalefall.loadconfigtest;
+package whalefall.loadconfigtest.loadconfigfrompropfile;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,6 +15,5 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = {"classpath:test.properties"})
 public class LoadConfig {
     private String A;
-
     private String B;
 }

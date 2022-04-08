@@ -1,4 +1,4 @@
-package whalefall.config;
+package whalefall.redis.config;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;

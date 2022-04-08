@@ -1,9 +1,12 @@
 package whalefall.filedownloadorup;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import whalefall.loadconfigtest.loadconfigfrompropfile.LoadConfig;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
@@ -17,9 +20,20 @@ import java.net.URLEncoder;
 @Slf4j
 public class Test4HtmlController {
 
+    private LoadConfig loadConfig;
+
+    public Test4HtmlController(LoadConfig loadConfig) {
+        this.loadConfig = loadConfig;
+    }
+    @GetMapping("testconfig")
+    public String testConfig() {
+        return loadConfig.getA() + "@@" + loadConfig.getB();
+    }
+
     @PostMapping("upload")
     public String upload(@RequestParam MultipartFile file) {
         log.info(file.getOriginalFilename());
+
         return "OK";
     }
 
