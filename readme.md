@@ -5,4 +5,4 @@
 4. `whalefall.test4annotation` 为从注解上获取注解的内容
 5. `whalefall.test4semaphore` 为信号量简单案例
 6. `whalefall.vuemock` 为其他项目模拟数据
-7. 
+7. `whalefall.loadconfigtest.conditionalonexpress` @ConditionalOnExpress 根据配置项动态加载某个Bean
