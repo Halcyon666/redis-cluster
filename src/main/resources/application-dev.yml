@@ -31,3 +31,11 @@ express:
   isSwitchExceptionClass: true
   switchFlag: true
   goException: true
+
+  goGoException: true
+#  gogoException: true
+#  go-go-exception: true
+  goexceptions: true
+#  ceShi: true
+  ceshi: true
+#  ce-shi: true
