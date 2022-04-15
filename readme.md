@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/whalefall541/redis-cluster/tree/main.svg?style=svg)](https://circleci.com/gh/whalefall541/redis-cluster/tree/main)
 ## 仓库包路径说明
 1. `whalefall.filedownloadorup`为excel文件上传，下载简单案例
 2. `whalefall.loadconfigtest` 为从指定配置文件读取配置案例

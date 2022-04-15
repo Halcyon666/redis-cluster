@@ -1,0 +1,59 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    # where the command run
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    parallelism: 6
+    steps:
+      # git clone code from github excluded subModule
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Test and Assemble
+          command: |
+            gradle test
+            gradle assemble
+
+      - store_artifacts:
+          path: build/libs
+
+      # add ssh_keys
+      # - add_ssh_keys:
+      #     fingerprints:
+      #       - "bc:c1:42:dc:b5:9b:aa:36:44:4e:eb:96:ee:3b:3c:38"
+      # - run: sudo echo $REMOTE_HOSTKEY >> ~/.ssh/known_hosts
+
+      # - run: echo '开始部署'
+      # - deploy:
+      #     name: deploy
+      #     command: |
+      #       sudo apt-get update && sudo apt-get install rsync && ls build/libs && echo '1'
+      #       sudo rsync -avce ssh build $SSH_USER@$SSH_IP:/project/ && echo '2'
+      #       ssh  $SSH_USER@$SSH_IP && echo '3'
+      #       java -jar /data/redis-cluster/$JAR_FILE_NAME && echo '4'
+      # - run: echo '部署完毕'
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build

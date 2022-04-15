@@ -24,11 +24,11 @@ public class RedisTest implements ApplicationContextAware {
 
     @Test
     public void test() {
-        redisTemplateList.forEach(ele -> System.err.println(ele));
-
-        redisTemplate.opsForValue().set("name", "admin");
-        String name = redisTemplate.opsForValue().get("name");
-        System.err.println(name); //输出admin
+//        redisTemplateList.forEach(ele -> System.err.println(ele));
+//
+//        redisTemplate.opsForValue().set("name", "admin");
+//        String name = redisTemplate.opsForValue().get("name");
+//        System.err.println(name); //输出admin
     }
 
     @Override
