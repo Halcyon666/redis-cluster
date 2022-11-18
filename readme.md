@@ -8,3 +8,4 @@
 6. `whalefall.vuemock` 为其他项目模拟数据
 7. `whalefall.loadconfigtest.conditionalonexpress` @ConditionalOnExpress 根据配置项动态加载某个Bean
 8. `whalefall.enum1` 枚举类简单用法
+9. `whalefall.mvc` springmvc @requestbody用法

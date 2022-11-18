@@ -19,8 +19,6 @@ spring:
   cache:
     jcache:
       config: classpath:ehcache.xml
-server:
-  port: 80
 
 express:
   isSwitchExceptionClass: false

@@ -24,8 +24,7 @@ spring:
 #    view:
 #      prefix: /pages/
 #      suffix: .html
-server:
-  port: 80
+
 
 express:
   isSwitchExceptionClass: true
