@@ -14,21 +14,26 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jersey', version: "2.6.2"
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jersey', version: "2.7.5"
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-test'
-
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    // https://cloud.tencent.com/developer/article/1480194
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
     // redis
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.5.8'
-    implementation 'redis.clients:jedis:3.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.7.5'
+    implementation "redis.clients:jedis:4.3.1"
+// https://mvnrepository.com/artifact/net.minidev/json-smart
+    implementation 'net.minidev:json-smart:2.4.8'
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.6.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.7.1'
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
 
     implementation group: 'org.apache.poi', name: 'poi', version: '5.1.0'
     // https://mvnrepository.com/artifact/javax.validation/validation-api
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 
 }
