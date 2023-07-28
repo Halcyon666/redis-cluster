@@ -7,6 +7,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,29 +42,22 @@ public class TestHttpClientUpload1 {
         builder.addBinaryBody("file", file, ContentType.APPLICATION_OCTET_STREAM, file.getName());
 
         // 添加其他参数
-        builder.addTextBody("test", "testHttpClientUpload test"); // 添加名为"name"的文本参数
-        builder.addTextBody("name", "John Doe"); // 添加名为"name"的文本参数
-        builder.addTextBody("description", "File description"); // 添加名为"description"的文本参数
+        builder.addTextBody("test", "testHttpClientUpload test");
 
         // 设置请求实体
         HttpEntity entity = builder.build();
         httpPost.setEntity(entity);
-
+        int statusCode = 500;
         // 发送HttpPost请求，并获取服务器的响应
         try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
             // 获取服务器的响应状态码
-            int statusCode = response.getStatusLine().getStatusCode();
-            logger.info("服务器响应状态码：{}", statusCode);
+            statusCode = response.getStatusLine().getStatusCode();
 
             // 在这里可以处理服务器的响应，比如检查是否上传成功等
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
+        Assertions.assertEquals(200, statusCode);
     }
 
 }
-
-
-
-
-

@@ -1,7 +1,10 @@
 package whalefall.filedownloadorup;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,7 +21,7 @@ import static whalefall.filedownloadorup.TestHttpClientUpload1.UPLOAD_URL;
  * @since 1.0.0
  */
 public class TestRestTemplateUpload {
-
+    private static final Logger logger = LoggerFactory.getLogger(TestHttpClientUpload1.class);
     @Test
     public void testResttemplateUpload() {
         File file = new File(FILE_PATH);
@@ -29,9 +32,6 @@ public class TestRestTemplateUpload {
         // 构建请求体
         MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("file", new FileSystemResource(file)); // 添加文件
-        requestBody.add("name", "John Doe"); // 添加其他参数
-        requestBody.add("description", "File description");
-        requestBody.add("description", "File description");
         requestBody.add("test", "testResttemplateUpload test");
 
         // 设置请求头
@@ -48,7 +48,7 @@ public class TestRestTemplateUpload {
         int statusCode = response.getStatusCodeValue();
         String responseBody = response.getBody();
 
-        System.out.println("服务器响应状态码：" + statusCode);
-        System.out.println("服务器响应内容：" + responseBody);
+        Assertions.assertEquals(200, statusCode);
+        Assertions.assertEquals("OK", responseBody);
     }
 }
