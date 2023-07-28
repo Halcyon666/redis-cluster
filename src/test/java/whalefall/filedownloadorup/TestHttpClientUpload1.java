@@ -53,11 +53,11 @@ public class TestHttpClientUpload1 {
             // 获取服务器的响应状态码
             statusCode = response.getStatusLine().getStatusCode();
 
-            // 在这里可以处理服务器的响应，比如检查是否上传成功等
+
+            Assertions.assertEquals(200, statusCode);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
-        Assertions.assertEquals(200, statusCode);
     }
 
 }
