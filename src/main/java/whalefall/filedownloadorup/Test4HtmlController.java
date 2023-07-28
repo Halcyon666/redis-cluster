@@ -38,8 +38,8 @@ public class Test4HtmlController {
     }
 
     @PostMapping("upload1")
-    public String upload1(@RequestParam MultipartFile file) {
-        log.info("upload1" + file.getOriginalFilename());
+    public String upload1(@RequestParam("file") MultipartFile file, @RequestParam("test") String test) {
+        log.info("upload1 {} test {}", file.getOriginalFilename(), test);
         return "OK";
     }
 
