@@ -11,9 +11,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import static whalefall.filedownloadorup.TestHttpClientUpload1.FILE_PATH;
 import static whalefall.filedownloadorup.TestHttpClientUpload1.UPLOAD_URL;
@@ -25,16 +25,31 @@ import static whalefall.filedownloadorup.TestHttpClientUpload1.UPLOAD_URL;
 public class TestRestTemplateUpload2 {
     private static final Logger logger = LoggerFactory.getLogger(TestHttpClientUpload1.class);
 
+    public static byte[] readFileAsByteArray(String filePath) {
+        try (FileInputStream fis = new FileInputStream(filePath);
+             ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                bos.write(buffer, 0, bytesRead);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Test
     public void testResttemplateUpload() throws IOException {
-        byte[] bytes = Files.readAllBytes(Paths.get(FILE_PATH));
 
         // 创建RestTemplate实例
         RestTemplate restTemplate = new RestTemplate();
 
         // 构建请求体
         MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("file", new ByteArrayResource(bytes) {
+        requestBody.add("file", new ByteArrayResource(readFileAsByteArray(FILE_PATH)) {
             @Override
             public String getFilename() {
                 return "test.xlsx";
