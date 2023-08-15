@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import static whalefall.filedownloadorup.TestHttpClientUpload1.FILE_PATH;
 import static whalefall.filedownloadorup.TestHttpClientUpload1.UPLOAD_URL;
@@ -36,7 +37,7 @@ public class TestRestTemplateUpload2 {
             }
             return bos.toByteArray();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return null;
     }
@@ -49,7 +50,7 @@ public class TestRestTemplateUpload2 {
 
         // 构建请求体
         MultiValueMap<String, Object> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("file", new ByteArrayResource(readFileAsByteArray(FILE_PATH)) {
+        requestBody.add("file", new ByteArrayResource(Objects.requireNonNull(readFileAsByteArray(FILE_PATH))) {
             @Override
             public String getFilename() {
                 return "test.xlsx";
