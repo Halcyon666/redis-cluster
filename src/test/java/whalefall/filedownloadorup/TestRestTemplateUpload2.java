@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static whalefall.filedownloadorup.TestHttpClientUpload1.FILE_PATH;
 import static whalefall.filedownloadorup.TestHttpClientUpload1.UPLOAD_URL;
 
 /**
@@ -26,7 +27,7 @@ public class TestRestTemplateUpload2 {
 
     @Test
     public void testResttemplateUpload() throws IOException {
-        byte[] bytes = Files.readAllBytes(Paths.get("D:\\project\\redis-cluster\\build\\resources\\main\\exceltemplet\\priceListTemplate.xlsx"));
+        byte[] bytes = Files.readAllBytes(Paths.get(FILE_PATH));
 
         // 创建RestTemplate实例
         RestTemplate restTemplate = new RestTemplate();
