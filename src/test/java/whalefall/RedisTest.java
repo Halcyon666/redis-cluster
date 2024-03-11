@@ -1,15 +1,17 @@
 package whalefall;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootTest
 public class RedisTest implements ApplicationContextAware {
@@ -22,13 +24,20 @@ public class RedisTest implements ApplicationContextAware {
     @Autowired
     private List<RedisTemplate> redisTemplateList;
 
-    @Test
+    //    @Test
     public void test() {
-//        redisTemplateList.forEach(ele -> System.err.println(ele));
-//
-//        redisTemplate.opsForValue().set("name", "admin");
-//        String name = redisTemplate.opsForValue().get("name");
-//        System.err.println(name); //输出admin
+
+        redisTemplate.opsForValue().set("name", "admin");
+        Set<String> keys = showAllKeys();
+        Assertions.assertTrue(!CollectionUtils.isEmpty(keys), "keys is empty");
+        showAllKeys();
+    }
+
+    private Set<String> showAllKeys() {
+        Set<String> keys = redisTemplate.keys("*");
+        assert keys != null;
+        keys.forEach(System.out::println);
+        return keys;
     }
 
     @Override

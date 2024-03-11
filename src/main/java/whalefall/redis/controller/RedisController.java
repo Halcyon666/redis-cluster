@@ -1,7 +1,9 @@
 package whalefall.redis.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2021/9/4 19:44
  */
 @RestController
+@Slf4j
 public class RedisController {
     private static int cnt = 0;
     private static Object object = new Object();
@@ -17,22 +20,35 @@ public class RedisController {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    /**
+     * http://localhost:8080/get?key=a
+     */
     @RequestMapping("/get")
     public String get(String key) {
-        Boolean flag = redisTemplate.opsForValue().setIfAbsent("lock", "lock");
-        if (!flag) return "error";
+        Boolean flag = getValueOperations().setIfAbsent("lock", "lock");
+        if (Boolean.FALSE.equals(flag)) {
+            return "error";
+        }
+
         try {
             cnt++;
-            System.out.println("get " + key + "第" + cnt + "次");
-        }finally {
+            log.info("lock has gotten");
+        } finally {
             redisTemplate.delete("lock");
         }
-        return redisTemplate.opsForValue().get(key);
+        return getValueOperations().get(key);
     }
 
+    private ValueOperations<String, String> getValueOperations() {
+        return redisTemplate.opsForValue();
+    }
+
+    /**
+     * http://localhost:8080/put?key=a
+     */
     @RequestMapping("/put")
     public void put(String key) {
-        redisTemplate.opsForValue().set(key, key);
+        getValueOperations().set(key, key);
     }
 
 }

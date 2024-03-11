@@ -1,11 +1,11 @@
 package whalefall.mvc;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * RequestBody与RequestParam测试
@@ -45,7 +45,7 @@ public class RequestTestController {
     }
 
     /**
-     * 以较复杂的Team对象接收前端传过来的json数据 (SpringMVC会智能的将符合要求的数据装配进该Teamr对象中)
+     * 以较复杂的Team对象接收前端传过来的json数据 (SpringMVC会智能的将符合要求的数据装配进该Team对象中)
      * 注:如果后端@RequestBody后的对象，持有了集合等,当前端向传参 令该对象持有的该集合为空时,json字符串中,
      * 对应位置应该形如"teamMembers":[]这么写;即:传递的json字符串中必须要有key，否者请求会出错
      *
